@@ -1,11 +1,12 @@
-import SafeScreen from "@/components/SafeScreen";
+// app/_layout.tsx
 import { Stack } from "expo-router";
+import { SafeAreaView } from "react-native";
 
 export default function RootLayout() {
-  //@ts-ignore
   return (
-    <SafeScreen>
-      <Stack/>;
-    </SafeScreen>
+    <>
+
+      <Stack screenOptions={{headerShown:false}} />
+    </>
   )
 }

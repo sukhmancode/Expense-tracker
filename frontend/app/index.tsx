@@ -1,18 +1,13 @@
-import { Link } from "expo-router";
-import { Text, View } from "react-native";
+import { useEffect } from 'react';
+import { router } from 'expo-router';
 
 export default function Index() {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor:"red"
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-      <Link href={"/about"}>About</Link>
-    </View>
-  );
+  useEffect(() => {
+    setTimeout(() => {
+    router.replace('/login');
+      
+    }, 50);
+  }, []);
+
+  return null;
 }

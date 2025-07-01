@@ -1,5 +1,5 @@
 import express, { Response,Request } from 'express'
-
+import cors from "cors";
 import dotenv from 'dotenv'
 import { sql } from './db';
 import authRoutes from './routes/auth.routes'; // Adjust path if needed
@@ -8,8 +8,10 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(cors())
 app.use(rateLimiter)
 app.use(express.json())
+app.use("/auth",authRoutes)
 
 async function DBinit() {
     try {
@@ -24,7 +26,7 @@ async function DBinit() {
       await sql`
         CREATE TABLE IF NOT EXISTS transactions (
           id SERIAL PRIMARY KEY,
-          user_id VARCHAR(255) NOT NULL,
+          user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
           title VARCHAR(255) NOT NULL,
           amount DECIMAL(10,2) NOT NULL,
           category VARCHAR(255) NOT NULL,
@@ -39,7 +41,6 @@ async function DBinit() {
     }
   }
   
-  app.use("/auth",authRoutes)
 
   app.get("/api/transactions/:userId",async(req:Request,res:Response) => {
     try {
