@@ -1,9 +1,9 @@
-import cron from "cron";
+import { CronJob } from 'cron';
 import https from "https";
 
-const job = new cron.CronJob("*/14 * * * *", function () {
+const job = new CronJob("*/14 * * * *", function () {
   https
-  //@ts-ignore
+    //@ts-ignore
     .get(process.env.API_URL, (res) => {
       if (res.statusCode === 200) console.log("GET request sent successfully");
       else console.log("GET request failed", res.statusCode);

@@ -3,6 +3,7 @@ import { View, Text, Button } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import { useTransactions } from '@/hooks/useTransactions';
+import PageLoader from '@/components/PageLoader';
 
 export default function HomeScreen() {
 
@@ -38,6 +39,10 @@ export default function HomeScreen() {
     await AsyncStorage.removeItem('jwtToken');
     router.replace("/login")
   };
+
+  if(isLoading) {
+    return <PageLoader/>
+  }
   return (
     <View style={{ padding: 20 }}>
       <Text>{userId }</Text>
