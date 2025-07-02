@@ -94,7 +94,7 @@ async function DBinit() {
         user_id = ${user_id} AND amount > 0`
 
         const expensesResult = await sql`
-        SELECT COALESCE(SUM(amount),0) as income FROM transactions WHERE
+        SELECT COALESCE(SUM(amount),0) as expenses FROM transactions WHERE
         user_id = ${user_id} AND amount < 0`
 
         res.status(400).json({

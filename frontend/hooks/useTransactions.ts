@@ -25,7 +25,7 @@ export const useTransactions = (userId: string | number) => {
         try {
             const response  = await fetch(`${API_URL}/transactions/summary/${userId}`);
             const data = await response.json();
-            setTransactions(data);
+            setSummary(data);
         }
         catch(error) {
             console.log(error);
