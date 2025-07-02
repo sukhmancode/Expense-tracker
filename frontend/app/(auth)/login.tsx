@@ -19,7 +19,7 @@ const Login = () => {
 
   const login = async () => {
     try {
-      const response = await fetch('http://192.168.29.149:3000/auth/login', {
+      const response = await fetch('https://expensetracker-fvpo.onrender.com/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -29,6 +29,7 @@ const Login = () => {
       if (response.ok) {
         await AsyncStorage.setItem('jwtToken', data.token);
         await AsyncStorage.setItem('userId', String(data.user.id)); // ✅ correct key
+        await AsyncStorage.setItem('userEmail', String(data.user.email)); // ✅ correct key
         
         router.replace('/about'); // or your home screen route
       }

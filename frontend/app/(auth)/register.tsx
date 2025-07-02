@@ -9,7 +9,7 @@ export default function RegisterScreen() {
 
   const handleRegister = async () => {
     try {
-      const response = await fetch("http://192.168.29.149:3000/auth/register", {
+      const response = await fetch("https://expensetracker-fvpo.onrender.com/auth/register", {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })

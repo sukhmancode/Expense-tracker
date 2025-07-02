@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import { sql } from './db';
 import authRoutes from './routes/auth.routes'; // Adjust path if needed
 import rateLimiter from './middleware/rateLimiter';
+import job from './cron';
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -12,7 +13,13 @@ app.use(cors())
 app.use(rateLimiter)
 app.use(express.json())
 app.use("/auth",authRoutes)
+if(process.env.NODE === "production") {
+  job.start();
+}
 
+app.get("/api/health",(req,res) => {
+  res.status(200).json({status:"ok"})
+})
 async function DBinit() {
     try {
       await sql`

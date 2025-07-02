@@ -7,13 +7,16 @@ import { useTransactions } from '@/hooks/useTransactions';
 export default function HomeScreen() {
 
   const [userId,setUserId] = useState<string  | null> ("");
+  const [userEmail,setUserEmail] = useState<string  | null> ("");
   const { transactions, summary, isLoading, loadData, deleteTransaction } = useTransactions(userId || '');
   
   useEffect(() => {
     const fetchUserId = async () => {
       const id = await AsyncStorage.getItem('userId');
+      const email = await AsyncStorage.getItem('userEmail')
       if(id) {
         setUserId(id)
+        setUserEmail(email)
       }else {
         router.replace("/(auth)/login")
       }
@@ -37,7 +40,8 @@ export default function HomeScreen() {
   };
   return (
     <View style={{ padding: 20 }}>
-      <Text>Welcome to the Home screen!</Text>
+      <Text>{userId }</Text>
+      <Text>{userEmail }</Text>
       <Button title="Logout" onPress={logout} />
     </View>
   );
