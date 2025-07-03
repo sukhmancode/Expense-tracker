@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, Image, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, Button, Image, TouchableOpacity, Alert, FlatList } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import { useTransactions } from '@/hooks/useTransactions';
@@ -8,12 +8,14 @@ import { styles } from '@/assets/styles/home.styles';
 import { Ionicons} from '@expo/vector-icons'
 import { COLORS } from '@/constant/colors';
 import BalanceCard from '@/components/BalanceCard';
+import TransactionsItem from '@/components/TransactionsItem';
 
 export default function HomeScreen() {
 
   const [userId,setUserId] = useState<string  | null> ("");
   const [userEmail,setUserEmail] = useState<string  | null> ("");
   const { transactions, summary, isLoading, loadData, deleteTransaction } = useTransactions(userId || '');
+  
   
   useEffect(() => {
     const fetchUserId = async () => {
@@ -88,6 +90,11 @@ export default function HomeScreen() {
       <BalanceCard summary={summary}/>
       </View>
 
+      <FlatList contentContainerStyle={styles.transactionsList}
+      data={transactions}
+      renderItem={({item}) => (
+        <TransactionsItem item={item} onDelete = {deleteTransaction }/>
+      ) }/>
     </View>
   );
 }

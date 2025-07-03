@@ -1,7 +1,7 @@
 import React,{useCallback, useState} from "react";
 import { Alert } from "react-native";
 export const useTransactions = (userId: string | number) => {
-    const API_URL = 'https://expensetracker-fvpo.onrender.com/api/'
+    const API_URL = 'https://expensetracker-fvpo.onrender.com/api'
     const [transactions,setTransactions] = useState([]);
     const [summary,setSummary] = useState({
         balance:0,
@@ -14,7 +14,7 @@ export const useTransactions = (userId: string | number) => {
         try {
             const response  = await fetch(`${API_URL}/transactions/${userId}`);
             const data = await response.json();
-            setTransactions(data);
+            setTransactions(data.transaction);
         }
         catch(error) {
             console.log(error);
@@ -37,7 +37,6 @@ export const useTransactions = (userId: string | number) => {
         if(!userId) {
             return;
         }
-
         setIsLoading(true);
         try {
             await Promise.all([fetchTransactions(),fetchSummary()]);
