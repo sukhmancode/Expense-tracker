@@ -97,11 +97,12 @@ async function DBinit() {
         SELECT COALESCE(SUM(amount),0) as expenses FROM transactions WHERE
         user_id = ${user_id} AND amount < 0`
 
-        res.status(400).json({
+        res.status(200).json({
             balance:balanceResult[0].balance,
             income:incomeResult[0].income,
             expenses:expensesResult[0].expenses,
         })
+        
     }
     catch(error) {
         console.log("error",error);
