@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, Image, TouchableOpacity, Alert, FlatList } from 'react-native';
+import { View, Text, Button, Image, TouchableOpacity, Alert, FlatList, RefreshControl } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import { useTransactions } from '@/hooks/useTransactions';
@@ -9,13 +9,20 @@ import { Ionicons} from '@expo/vector-icons'
 import { COLORS } from '@/constant/colors';
 import BalanceCard from '@/components/BalanceCard';
 import TransactionsItem from '@/components/TransactionsItem';
+import NoTransactions from '@/components/NoTransactions';
 
 export default function HomeScreen() {
 
   const [userId,setUserId] = useState<string  | null> ("");
   const [userEmail,setUserEmail] = useState<string  | null> ("");
+  const [refreshing,setRefreshing] = useState(false)
   const { transactions, summary, isLoading, loadData, deleteTransaction } = useTransactions(userId || '');
   
+  const onRefresh = async() => {
+    setRefreshing(true);
+    await loadData();
+    setRefreshing(false)
+  }
   
   useEffect(() => {
     const fetchUserId = async () => {
@@ -54,6 +61,12 @@ export default function HomeScreen() {
 
   };
 
+  const handleDelete = (id:number | string) => {
+    Alert.alert("Delete Transaction", "Are you sure about that", [
+      {text:"Cancel",style:"cancel"},
+      {text:"Delete",style:"destructive",onPress:() => deleteTransaction(id)}
+    ])
+  }
   if(isLoading) {
     return <PageLoader/>
   }
@@ -93,8 +106,12 @@ export default function HomeScreen() {
       <FlatList contentContainerStyle={styles.transactionsList}
       data={transactions}
       renderItem={({item}) => (
-        <TransactionsItem item={item} onDelete = {deleteTransaction }/>
-      ) }/>
+        <TransactionsItem item={item} onDelete = {handleDelete}/>
+        
+      ) }
+      ListEmptyComponent={<NoTransactions/>}
+      showsVerticalScrollIndicator={true}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}/>
     </View>
   );
 }

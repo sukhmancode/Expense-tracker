@@ -132,6 +132,9 @@ export const styles = StyleSheet.create({
     marginBottom: 15,
   },
   transactionCard: {
+    paddingInline:10,
+    paddingBlock:5,
+    gap:4,
     backgroundColor: COLORS.card,
     borderRadius: 12,
     marginBottom: 10,
