@@ -1,6 +1,5 @@
 import { Stack, router } from "expo-router";
 import { useEffect } from "react";
-import { SafeAreaView, } from "react-native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {StatusBar} from 'expo-status-bar'
 

@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { styles } from '@/assets/styles/create.styles';
@@ -32,7 +32,7 @@ const Create = () => {
       
     };
     fetchUserId();
-  }, []);
+  }, [userId]);
 
   const handleCreate = async () => {
     if (!title.trim()) {
@@ -66,13 +66,13 @@ const Create = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error("Failed to create transaction");
+        throw new Error("Failed to create transaction"+errorData);
       }
 
       Alert.alert("Success", "Transaction created successfully");
       router.push("/about")
     } catch (error) {
-      Alert.alert("Error", "Transaction not created");
+      Alert.alert("Error", "Transaction not created"+error);
     } finally {
       setIsLoading(false);
     }

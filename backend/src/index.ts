@@ -2,7 +2,7 @@ import express, { Response,Request } from 'express'
 import cors from "cors";
 import dotenv from 'dotenv'
 import { sql } from './db';
-import authRoutes from './routes/auth.routes'; // Adjust path if needed
+import authRoutes from './routes/authRoutes'; // Adjust path if needed
 import rateLimiter from './middleware/rateLimiter';
 import job from './cron';
 dotenv.config();
@@ -62,7 +62,6 @@ async function DBinit() {
         
     }
   })
-//@ts-ignore
   app.delete("/api/transactions/:id",async(req,res) => {
     const {id} = req.params;
     if(isNaN(parseInt(id))) {
@@ -113,7 +112,6 @@ async function DBinit() {
     }
 
   })
-  //@ts-ignore
   app.post("/api/transactions",async(req:Request,res:Response) => {
     const {title,amount,category,user_id} = req.body;
 

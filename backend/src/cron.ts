@@ -1,10 +1,10 @@
 import { CronJob } from 'cron';
 import https from "https";
 
+const API_URL = process.env.API_URL;
 const job = new CronJob("*/14 * * * *", function () {
   https
-    //@ts-ignore
-    .get(process.env.API_URL, (res) => {
+    .get(API_URL, (res) => {
       if (res.statusCode === 200) console.log("GET request sent successfully");
       else console.log("GET request failed", res.statusCode);
     })

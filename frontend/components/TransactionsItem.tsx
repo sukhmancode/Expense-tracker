@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { styles } from '@/assets/styles/home.styles';
 import { Ionicons } from '@expo/vector-icons';

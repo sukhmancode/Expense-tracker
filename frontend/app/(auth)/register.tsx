@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Alert, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
+import { View, TextInput, Alert, StyleSheet, Text, Image, TouchableOpacity } from 'react-native';
 import { router } from 'expo-router';
 import { COLORS } from '@/constant/colors';
 
@@ -64,8 +64,8 @@ export default function RegisterScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, paddingTop: 50,
-    paddingInline:20, justifyContent: 'flex-start', 
+    flex: 1, paddingTop: 150,
+    paddingInline:20, justifyContent: 'center', 
    
   },
   newcontainer: {

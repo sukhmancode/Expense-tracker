@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, Image, TouchableOpacity, Alert, FlatList, RefreshControl } from 'react-native';
+import { View, Text,Image, TouchableOpacity, Alert, FlatList, RefreshControl } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { router } from 'expo-router';
 import { useTransactions } from '@/hooks/useTransactions';
@@ -41,13 +41,8 @@ export default function HomeScreen() {
   useEffect(() => {
     if (userId) {
       loadData();
-      
     }
-  }, [userId]);
-  console.log(userId);
-
-  console.log(summary);
-  
+  }, [userId,loadData])
   
   const logout = async () => {
     Alert.alert("Logout" , "Are you sure about that!", [

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   Alert,
-  Button,
   StyleSheet,
   Text,
   TextInput,
@@ -72,8 +71,8 @@ const Login = () => {
       </TouchableOpacity>
 
       <View style={styles.bottomText}>
-        <Text>Don't have an account? </Text>
-        <TouchableOpacity onPress={() => router.replace('/(auth)/register')}>
+      <Text>Don&apos;t have an account? </Text>
+        <TouchableOpacity onPress={() => router.replace(`/(auth)/register`)}>
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
       </View>
@@ -86,6 +85,7 @@ export default Login;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent:"center",
     paddingInline: 20,
     paddingTop:50
   },
